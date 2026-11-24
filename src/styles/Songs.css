@@ -1,0 +1,619 @@
+/* ============================================
+   SONGS PAGE
+   ============================================ */
+.songs-page {
+  min-height: calc(100vh - 68px - 80px);
+  padding: 3rem 1.5rem 6rem;
+}
+
+.songs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.songs-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.songs-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: var(--text-light);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.songs-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  margin: 1rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 2px;
+}
+
+.songs-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0.75rem 0 0;
+}
+
+/* ============================================
+   TOOLBAR (tabs + search)
+   ============================================ */
+.songs-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.songs-search {
+  max-width: 320px;
+  width: 100%;
+}
+
+/* ============================================
+   SONG LIST (vertical, full-width rows)
+   ============================================ */
+.song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.song-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.15rem 1.5rem;
+  background: linear-gradient(145deg, #1c1c1c 0%, #141414 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Gold accent on left edge */
+.song-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12%;
+  bottom: 12%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.song-item:hover {
+  transform: translateX(4px);
+  border-color: var(--border-strong);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(212, 175, 55, 0.12);
+}
+
+.song-item:hover::before {
+  opacity: 1;
+}
+
+/* Number column */
+.song-item-number {
+  font-family: "Courier New", monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 0.35rem 0.5rem;
+  background: var(--gold-faint);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  text-shadow: 0 0 12px var(--gold-glow);
+}
+
+/* Middle column */
+.song-item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.song-item-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.song-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.song-item-file {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 320px;
+}
+
+/* Right column — actions */
+.song-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.song-item-actions .btn-view,
+.song-item-actions .btn-download {
+  flex: none;
+  padding: 0.55rem 1rem;
+  font-size: 0.78rem;
+  min-width: 100px;
+}
+
+/* ============================================
+   BUTTONS (View / Download)
+   ============================================ */
+.btn-view,
+.btn-download {
+  padding: 0.6rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.btn-view {
+  color: var(--gold-light);
+  background: transparent;
+  border-color: var(--border-strong);
+}
+
+.btn-view:hover {
+  background: var(--gold-faint);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-download {
+  color: #0d0d0d;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  border-color: transparent;
+  box-shadow: 0 2px 12px rgba(212, 175, 55, 0.25);
+}
+
+.btn-download:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.4);
+}
+
+.btn-download.small {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.75rem;
+  flex: none;
+}
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding: 0.75rem;
+  background: linear-gradient(145deg, #1c1c1c 0%, #141414 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.page-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--gold-faint);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.page-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-light);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-num:hover {
+  background: var(--gold-faint);
+  border-color: var(--border-strong);
+}
+
+.page-num.active {
+  color: #0d0d0d;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  border-color: transparent;
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+}
+
+.page-ellipsis {
+  padding: 0 0.25rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  user-select: none;
+}
+
+.pagination-info {
+  text-align: center;
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.pagination-info strong {
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(145deg, #1c1c1c 0%, #141414 100%);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 14px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+  opacity: 0.6;
+}
+
+/* ============================================
+   PDF MODAL
+   ============================================ */
+.pdf-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 3000;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.pdf-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 950px;
+  height: 88vh;
+  background: #141414;
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(212, 175, 55, 0.15);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pdf-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.pdf-modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0 0 0.15rem;
+}
+
+.pdf-modal-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+.pdf-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.pdf-modal-close {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pdf-modal-close:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  transform: rotate(90deg);
+}
+
+.pdf-modal-body {
+  flex: 1;
+  background: #0d0d0d;
+  overflow: hidden;
+}
+
+.pdf-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.pdf-modal-foot {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pdf-open-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.2s ease;
+}
+
+.pdf-open-link:hover {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
+/* ============================================
+   MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  .songs-page {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .songs-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .songs-search {
+    max-width: 100%;
+  }
+
+  .category-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-tab {
+    flex-shrink: 0;
+  }
+
+  /* List → stacked rows */
+  .song-item {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "number actions"
+      "main actions";
+    gap: 0.75rem 1rem;
+    padding: 1rem 1rem 1rem 1.15rem;
+  }
+
+  .song-item::before {
+    top: 8%;
+    bottom: 8%;
+  }
+
+  .song-item-number {
+    grid-area: number;
+    font-size: 0.95rem;
+    padding: 0.25rem 0.5rem;
+    justify-self: start;
+    min-width: 60px;
+  }
+
+  .song-item-main {
+    grid-area: main;
+  }
+
+  .song-item-title {
+    font-size: 1rem;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .song-item-meta {
+    gap: 0.5rem;
+  }
+
+  .song-item-file {
+    max-width: 100%;
+    font-size: 0.72rem;
+  }
+
+  .song-item-actions {
+    grid-area: actions;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-self: stretch;
+    justify-content: center;
+  }
+
+  .song-item-actions .btn-view,
+  .song-item-actions .btn-download {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.7rem;
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* Compact pagination */
+  .pagination {
+    gap: 0.35rem;
+    padding: 0.6rem;
+  }
+
+  .page-btn {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.78rem;
+  }
+
+  .page-num {
+    min-width: 32px;
+    height: 32px;
+    font-size: 0.82rem;
+  }
+
+  .page-numbers {
+    display: none;
+  }
+
+  /* PDF modal */
+  .pdf-modal {
+    height: 92vh;
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .pdf-modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .pdf-modal-head {
+    padding: 0.75rem 1rem;
+  }
+
+  .pdf-modal-title {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .btn-download.small {
+    display: none;
+  }
+}

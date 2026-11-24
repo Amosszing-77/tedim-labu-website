@@ -1,0 +1,314 @@
+/* ============================================
+   Gold & Dark Theme — CSS Variables
+   ============================================ */
+:root {
+  --bg-dark: #0d0d0d;
+  --bg-panel: #141414;
+  --bg-elevated: #1c1c1c;
+
+  --gold: #d4af37;
+  --gold-light: #f0d76b;
+  --gold-dark: #a8862a;
+  --gold-glow: rgba(212, 175, 55, 0.25);
+  --gold-faint: rgba(212, 175, 55, 0.08);
+
+  --text-light: #f5f5f5;
+  --text-muted: #a0a0a0;
+
+  --border-subtle: rgba(212, 175, 55, 0.18);
+  --border-strong: rgba(212, 175, 55, 0.4);
+}
+
+/* ============================================
+   Base Navbar
+   ============================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #141414 0%, #0d0d0d 100%);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(212, 175, 55, 0.06);
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ============================================
+   Logo
+   ============================================ */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Space between image and text */
+  text-decoration: none;
+  color: var(--gold);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    color 0.25s ease,
+    text-shadow 0.25s ease;
+}
+
+/* The Circular Image */
+.logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 10px var(--gold-glow);
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover .logo-img {
+  transform: scale(1.05);
+}
+
+.navbar-logo:hover {
+  color: var(--gold-light);
+  text-shadow: 0 0 12px var(--gold-glow);
+}
+
+.logo-text {
+  background: linear-gradient(
+    90deg,
+    var(--gold-dark),
+    var(--gold-light),
+    var(--gold-dark)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================
+   Links
+   ============================================ */
+.navbar-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  display: inline-block;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 0;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+/* Underline effect */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--gold-light);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--gold);
+  text-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* ============================================
+   Admin Button
+   ============================================ */
+.admin-item {
+  list-style: none;
+}
+
+.admin-btn {
+  padding: 0.55rem 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.admin-btn:hover {
+  background: var(--gold-faint);
+  border-color: var(--gold);
+  color: var(--gold-light);
+  box-shadow: 0 0 14px var(--gold-glow);
+}
+
+.admin-btn.logged-in {
+  color: #0d0d0d;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  border-color: transparent;
+}
+
+.admin-btn.logged-in:hover {
+  filter: brightness(1.08);
+}
+
+.logout-btn {
+  padding: 0.55rem 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.logout-btn:hover {
+  color: #ff6b6b;
+  border-color: rgba(255, 107, 107, 0.5);
+}
+
+/* ============================================
+   Hamburger
+   ============================================ */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.navbar-toggle .bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold);
+  box-shadow: 0 0 6px var(--gold-glow);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* Hamburger → X */
+.navbar-toggle.active .bar:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+.navbar-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+.navbar-toggle.active .bar:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* ============================================
+   Mobile
+   ============================================ */
+@media (max-width: 768px) {
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+    padding: 0;
+  }
+
+  .navbar-links.open {
+    max-height: 600px; /* Increased for extra admin buttons */
+  }
+
+  .navbar-links li {
+    width: 100%;
+    border-top: 1px solid rgba(212, 175, 55, 0.08);
+  }
+
+  .navbar-links li:first-child {
+    border-top: none;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 1.1rem 1.5rem;
+    width: 100%;
+    text-align: left;
+    border-left: 2px solid transparent;
+    transition: all 0.25s ease;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: var(--gold-faint);
+    border-left-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  /* Mobile: stack admin buttons full-width */
+  .admin-item {
+    width: 100%;
+    padding: 0.5rem 1.5rem 0.75rem;
+  }
+
+  .admin-btn,
+  .logout-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 1rem;
+  }
+}
